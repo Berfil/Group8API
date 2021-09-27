@@ -15,7 +15,7 @@
 
 library(httr)
 library(dplyr)
-
+library(shiny)
 api_url <- paste("https://data.riksdagen.se/voteringlista/?rm=2020%2F21&bet=&punkt=&valkrets=&rost=&iid=&sz=10000&utformat=json&gruppering=namn")
 
 raw_api_result <- httr::GET(api_url)
@@ -28,3 +28,21 @@ str(content(raw_api_result))
 result_list <- content(raw_api_result)
 str(result_list)
 result_df <- dplyr::bind_rows(result_list$votering$votering)
+
+ui <- fluidPage(
+  sliderInput(inputId="ws", label="Choose bandwidth size", value=0.01, min=0.1, max=1),
+  plotOutput("densPlot")
+)
+
+server <- function(input, output) {
+
+  output$densPlot <- renderPlot({
+    ggplot(result_df, aes(x=result_df$Ja))+
+      stat_density(alpha=0.8, bw=input$ws, position="identity")
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+
+
