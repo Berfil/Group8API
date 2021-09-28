@@ -37,6 +37,8 @@ df_1 <- mapply(cbind, df_1, "year" = year_labels, SIMPLIFY = F)
 # Merge them all together
 master_df <- dplyr::bind_rows(df_1)
 
+master_df[,2:5] <- lapply(master_df[,2:5], as.numeric)
+
 # Create a new variable for party ID
 master_df$parti <- gsub(".*[(]([^)]+)[)].*", "\\1", master_df$namn)
 master_df$parti[master_df$parti == "fp"] <- "l"
