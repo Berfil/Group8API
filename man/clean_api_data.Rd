@@ -7,7 +7,7 @@
 clean_api_data(list1)
 }
 \arguments{
-\item{list}{object as a nested list containing annual voting data}
+\item{list1}{object as a nested list containing annual voting data}
 }
 \value{
 returns a list of elements where each element is a data frame of annual voting by party

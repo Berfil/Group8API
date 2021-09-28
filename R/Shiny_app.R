@@ -1,11 +1,13 @@
 #' @title Shiny App
+#' @description creates visualization tool for users
+#' @param dataframe_1 as a list if data frames from clean_api_data function
 #' @import shiny
 #' @import ggplot2
 #' @import dplyr
+#' @import scales
 #' @export
 shinyFunction <- function(dataframe_1) {
 
-require(shiny)
 shinyApp(
 # Define UI for dataset viewer app ----
 ui <- fluidPage(

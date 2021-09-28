@@ -1,12 +1,12 @@
 Package: Group8API
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Visualizes voting data from Riksdagen API
 Version: 0.1.0
 Author: c(
   person("Jaskirat", "Marar", email = "jasma356@student.liu.se", role = c("aut")),
   person("Filip", "Berndtsson", email = filbe354@student.liu.se, role = "aut","cre"))
 Maintainer: Jaskirat Marar <jasma356@student.liu.se>, Filip Berndtsson <filbe354@student.liu.se>
-Description: COnnects to the Riksdagen API to pull voting data from 2009-2020 and visualize it for the user through a Shiny App
+Description: Connects to the Riksdagen API to pull voting data from 2009-2020 and visualize it for the user through a Shiny App
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -17,4 +17,4 @@ Suggests:
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
-Imports: ggplot2, dplyr, shiny, jsonlite, httr
+Imports: ggplot2, dplyr, shiny, jsonlite, httr, scales

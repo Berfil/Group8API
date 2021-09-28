@@ -6,6 +6,9 @@
 \usage{
 shinyFunction(dataframe_1)
 }
+\arguments{
+\item{dataframe_1}{as a list if data frames from clean_api_data function}
+}
 \description{
-Shiny App
+creates visualization tool for users
 }
