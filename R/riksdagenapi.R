@@ -110,22 +110,47 @@ master_df$parti <- toupper(master_df$parti)
 # drops <- c("SVP_label1","SVP_label2","SVP_label3", "SVP_label4" , "SVP_label5" , "SVP_label6" ,"SVP_label7" , "SVP_label8" , "SVP_label9")
 # new_df_thing <- new_df_thing[ , !(names(new_df_thing) %in% drops)]
 
+#party mapping
+party_map <- as.data.frame(Name = c("Center_Party",
+                                      "Krist_demokraterna",
+                                      "Liberal_party",
+                                      "Moderat_party",
+                                      "Enviorment_party",
+                                      "Social_democrats",
+                                      "Sweden_democrats",
+                                      "Left_party"),
+                           Abbrev = c("C",
+                                      "KD",
+                                      "L",
+                                      "M",
+                                      "MP",
+                                      "S",
+                                      "SD",
+                                      "V"))
 
+# # Start sorting
+# ir <- master_df %>%
+#   group_by(parti)
 
-# Start sorting
-ir <- master_df %>%
-  group_by(parti)
 
 # Create a DF for each party!
-Center_party <- group_split(ir)[[2]]
-Krist_demokraterna <- group_split(ir)[[3]]
-Liberal_party <- group_split(ir)[[4]]
-Moderat_party <-group_split(ir)[[5]]
-Enviorment_party <-group_split(ir)[[6]]
-Social_democrats <-group_split(ir)[[7]]
-Sweden_democrats <-group_split(ir)[[8]]
-Left_party <-group_split(ir)[[9]]
+# Center_party <- group_split(ir)[[2]]
+# Krist_demokraterna <- group_split(ir)[[3]]
+# Liberal_party <- group_split(ir)[[4]]
+# Moderat_party <-group_split(ir)[[5]]
+# Enviorment_party <-group_split(ir)[[6]]
+# Social_democrats <-group_split(ir)[[7]]
+# Sweden_democrats <-group_split(ir)[[8]]
+# Left_party <-group_split(ir)[[9]]
 
+Center_party <- master_df[master_df$parti == "C",]
+Krist_demokraterna <- master_df[master_df$parti == "KD",]
+Liberal_party <- master_df[master_df$parti == "L",]
+Moderat_party <-master_df[master_df$parti == "M",]
+Enviorment_party <-master_df[master_df$parti == "MP",]
+Social_democrats <-master_df[master_df$parti == "S",]
+Sweden_democrats <-master_df[master_df$parti == "SD",]
+Left_party <-master_df[master_df$parti == "V",]
 
 
 
