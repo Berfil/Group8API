@@ -1,3 +1,7 @@
+shinyFunction <- function(dataframe_1) {
+
+#require(shiny)
+shinyApp(
 # Define UI for dataset viewer app ----
 ui <- fluidPage(
 
@@ -34,7 +38,7 @@ ui <- fluidPage(
 
     )
   )
-)
+),
 
 
 # Define server logic to summarize and view selected dataset ----
@@ -43,14 +47,14 @@ server <- function(input, output) {
   # Return the requested dataset ----
   datasetInput <- reactive({
     switch(input$dataset,
-           "Center partiet" = Center_party,
-           "Kristdemokraterna" = Krist_demokraterna,
-           "Liberalerna" = Liberal_party,
-           "Moderaterna" = Moderat_party ,
-           "Miljö partiet" = Enviorment_party,
-           "Socialdemokraterna" = Social_democrats,
-           "Svergiedemokraterna" = Sweden_democrats,
-           "Vänster partiet" =Left_party
+           "Center partiet" = dataframe_1$Center_party,
+           "Kristdemokraterna" = dataframe_1$Krist_demokraterna,
+           "Liberalerna" = dataframe_1$Liberal_party,
+           "Moderaterna" = dataframe_1$Moderat_party ,
+           "Miljö partiet" = dataframe_1$Enviorment_party,
+           "Socialdemokraterna" = dataframe_1$Social_democrats,
+           "Svergiedemokraterna" = dataframe_1$Sweden_democrats,
+           "Vänster partiet" = dataframe_1$Left_party
            )
   })
 
@@ -89,8 +93,5 @@ server <- function(input, output) {
 
   })
 
-
-
 }
-
-shinyApp(ui = ui, server = server)
+)}
