@@ -5,9 +5,10 @@ get_riksdagen_api_data <- function() {
   api_result_list <- list()
   i = 2009
   j = 1
+  #x = list()
   for (i in years) {
     api_url <- paste0("https://data.riksdagen.se/voteringlista/?rm=",i,"%2F",(i-1999),"&bet=&punkt=&valkrets=&rost=&iid=&sz=10000&utformat=json&gruppering=namn")
-    #x <- httr::GET(api_url)
+    #x[j] <- httr::status_code(httr::GET(api_url))
     api_result_list[j] <- jsonlite::fromJSON(api_url)
     names(api_result_list[j]) <- i
     j = j + 1
