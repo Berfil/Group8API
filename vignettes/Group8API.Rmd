@@ -1,0 +1,45 @@
+---
+title: "Group8API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Group8API}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+runtime: shiny
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE
+)
+```
+
+```{r setup}
+library(Group8API)
+```
+
+# Riksdagen API
+
+This package has been built to visualize the voting data released by the Swedish Riksdagen. The package connects to their API and gains access to the memberwise voting data from 2009-2020.
+
+```{r}
+library(Group8API)
+x <- get_riksdagen_api_data()
+```
+
+The data from the API is retreived in JSON format. The function parses the data and returns a list with each element representing annual voting data by member
+
+```{r}
+str(x)
+```
+
+The user then calls the clean api data function in the package which takes this output and wrangles the data into a list of voting data by parties for better visualization
+
+```{r}
+y <- clean_api_data(x)
+str(y)
+```
+
+Finally, after fetching and cleaning the data, the user can pass this data into out visualization tool built on Shiny by calling the function shinyFunction(). The interface allows the user to select which party's voting data is to looked at and see their vote distribution towards yes, no etc. Number of participants for that party can also be controlled by the user. 

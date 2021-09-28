@@ -1,6 +1,11 @@
+#' @title Shiny App
+#' @import shiny
+#' @import ggplot2
+#' @import dplyr
+#' @export
 shinyFunction <- function(dataframe_1) {
 
-#require(shiny)
+require(shiny)
 shinyApp(
 # Define UI for dataset viewer app ----
 ui <- fluidPage(
@@ -88,10 +93,6 @@ server <- function(input, output) {
                 position = position_stack(vjust = 0.5)) +
       coord_polar(theta = "y")
 
-
-
-
   })
-
+})
 }
-)}
