@@ -25,38 +25,7 @@ get_riksdagen_api_data <- function() {
 
   result_list = as.list(c())
   result_list <- lapply(api_result_list, "[[", 12)
+  return(result_list)
 }
-# Create the DF we will use
-
-df_1 <- get_riksdagen_api_data()
-
-#add years column to each DF in list
-year_labels <- c(2009:2020)
-df_1 <- mapply(cbind, df_1, "year" = year_labels, SIMPLIFY = F)
-
-
-# Merge them all together
-master_df <- dplyr::bind_rows(df_1)
-
-master_df[,2:5] <- lapply(master_df[,2:5], as.numeric)
-
-# Create a new variable for party ID
-master_df$parti <- gsub(".*[(]([^)]+)[)].*", "\\1", master_df$namn)
-master_df$parti[master_df$parti == "fp"] <- "l"
-master_df$parti <- toupper(master_df$parti)
-
-
-Center_party <- master_df[master_df$parti == "C",]
-Krist_demokraterna <- master_df[master_df$parti == "KD",]
-Liberal_party <- master_df[master_df$parti == "L",]
-Moderat_party <-master_df[master_df$parti == "M",]
-Enviorment_party <-master_df[master_df$parti == "MP",]
-Social_democrats <-master_df[master_df$parti == "S",]
-Sweden_democrats <-master_df[master_df$parti == "SD",]
-Left_party <-master_df[master_df$parti == "V",]
-
-
-
-
 
 

@@ -1,0 +1,24 @@
+---
+title: "Riksdagen_data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Riksdagen_data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  message = FALSE
+)
+```
+
+```{r setup}
+library(Group8API)
+```
+
+#Using the Riksdagen API for visualizing voting data
+
+This package has been built to allow users to browse and visualize voting data from Riksdagen. The data on voting is available from 2009 onwards and this package focusses on pulling the same from their API.
