@@ -54,25 +54,6 @@ Enviorment_party <-master_df[master_df$parti == "MP",]
 Social_democrats <-master_df[master_df$parti == "S",]
 Sweden_democrats <-master_df[master_df$parti == "SD",]
 Left_party <-master_df[master_df$parti == "V",]
-#
-# values <- as.vector(c(sum(Left_party$Ja , na.rm = T), sum(Left_party$Nej, na.rm = T) , sum(Left_party$Frånvarande , na.rm = T) , sum(Left_party$Avstår, na.rm = T)))
-# namn = as.vector(c("Ja" , "nej", "Frånvarande" , "Avstår"))
-# test_df  <- data.frame(values , namn)
-#
-#
-# poop <- test_df %>%
-#   group_by(values) %>% # Variable to be transformed
-#   count() %>%
-#   ungroup() %>%
-#   mutate(perc = `n` / sum(`n`)) %>%
-#   arrange(perc) %>%
-#   mutate(labels = scales::percent(perc))
-#
-#
-#
-#
-# test_df <-test_df %>%
-#   mutate(freq = round(values / sum(values), 3)) %>%
-#   arrange(desc(freq))  %>%
-#   mutate(labels = scales::percent(freq))
+
+
 
