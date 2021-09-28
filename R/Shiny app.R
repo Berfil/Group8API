@@ -28,7 +28,9 @@ ui <- fluidPage(
       verbatimTextOutput("summary"),
 
       # Output: HTML table with requested number of observations ----
-      tableOutput("view")
+      tableOutput("view") ,
+
+      plotOutput("pie")
 
     )
   )
@@ -63,6 +65,31 @@ server <- function(input, output) {
   output$view <- renderTable({
     head(datasetInput(), n = input$obs)
   })
+
+  output$pie <- renderPlot({
+    dataset <- datasetInput()
+    value <- values <- as.vector(c(sum(dataset[,2] , na.rm = T), sum(dataset[,3], na.rm = T) , sum(dataset[,4] , na.rm = T) , sum(dataset[,5], na.rm = T)))
+    namn = as.vector(c("Ja" , "nej", "Frånvarande" , "Avstår"))
+    pie_df <- data.frame(values , namn)
+
+
+    pie_df <- pie_df %>%
+      mutate(freq = round(values / sum(values), 3)) %>%
+      arrange(desc(freq))  %>%
+      mutate(labels = scales::percent(freq))
+
+    ggplot(pie_df, aes(x = "", y = freq, fill = namn)) +
+      geom_col() +
+      geom_text(aes(label = labels),
+                position = position_stack(vjust = 0.5)) +
+      coord_polar(theta = "y")
+
+
+
+
+  })
+
+
 
 }
 
