@@ -12,17 +12,113 @@ get_riksdagen_api_data <- function() {
     names(api_result_list[j]) <- i
     j = j + 1
   }
-  
+
   i <- NULL
   j <- NULL
-  
-  
+
+
   #naming the result list with years
   names(api_result_list) <- as.character(years)
-  
+
   #creating a resultant list that contains yearly data in a separate list element by year to be used for final analysis
-  
+
   result_list = as.list(c())
   result_list <- lapply(api_result_list, "[[", 12)
 }
 get_riksdagen_api_data
+# Create the DF we will use
+
+df_1 <- get_riksdagen_api_data()
+
+
+# get all the data per year
+testing_1 <-df_1$`2009`
+testing_1$year = 2009
+
+testing_2 <-df_1$`2010`
+testing_2$year = 2010
+
+
+
+testing_3 <-df_1$`2011`
+testing_3$year = 2011
+
+testing_4 <-df_1$`2012`
+testing_4$year = 2012
+
+testing_5 <-df_1$`2013`
+testing_5$year = 2013
+
+testing_6 <-df_1$`2014`
+testing_6$year = 2014
+
+testing_7 <-df_1$`2015`
+testing_7$year = 2015
+
+testing_8 <-df_1$`2016`
+testing_8$year = 2016
+
+testing_9 <-df_1$`2017`
+testing_9$year = 2017
+
+testing_10 <-df_1$`2018`
+testing_10$year = 2018
+
+testing_11 <-df_1$`2019`
+testing_11$year = 2019
+
+testing_12 <-df_1$`2020`
+testing_12$year = 2020
+
+
+
+# Merge them all together
+new_df_thing <- merge(testing_1 , testing_2 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_3 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_4 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_5 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_6 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_7 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_8 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_9 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_10 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_11 , all = TRUE)
+new_df_thing <- merge(new_df_thing , testing_12 , all = TRUE)
+
+# Create a new variable for party ID
+new_df_thing$SVP_label1 = ifelse(grepl("(L)", new_df_thing$namn, fixed = T), "(L)", "")
+new_df_thing$SVP_label2 = ifelse(grepl("(KD)", new_df_thing$namn, fixed = T), "(KD)", "")
+new_df_thing$SVP_label3 = ifelse(grepl("(S)", new_df_thing$namn, fixed = T), "(S)", "")
+new_df_thing$SVP_label4 = ifelse(grepl("(M)", new_df_thing$namn, fixed = T), "(M)", "")
+new_df_thing$SVP_label5 = ifelse(grepl("(MP)", new_df_thing$namn, fixed = T), "(MP)", "")
+new_df_thing$SVP_label6 = ifelse(grepl("(SD)", new_df_thing$namn, fixed = T), "(SD)", "")
+new_df_thing$SVP_label7 = ifelse(grepl("(C)", new_df_thing$namn, fixed = T), "(C)", "")
+new_df_thing$SVP_label8 = ifelse(grepl("(V)", new_df_thing$namn, fixed = T), "(V)", "")
+new_df_thing$SVP_label9 = ifelse(grepl("(FP)", new_df_thing$namn, fixed = T), "(L)", "")
+
+new_df_thing$SVP_label = paste0(new_df_thing$SVP_label1, new_df_thing$SVP_label2, new_df_thing$SVP_label3, new_df_thing$SVP_label4, new_df_thing$SVP_label5, new_df_thing$SVP_label6, new_df_thing$SVP_label7, new_df_thing$SVP_label8, new_df_thing$SVP_label9)
+
+# Drop all the ugly variables created
+drops <- c("SVP_label1","SVP_label2","SVP_label3", "SVP_label4" , "SVP_label5" , "SVP_label6" ,"SVP_label7" , "SVP_label8" , "SVP_label9")
+new_df_thing <- new_df_thing[ , !(names(new_df_thing) %in% drops)]
+
+# Start sorting
+ir <- new_df_thing %>%
+  group_by(SVP_label)
+
+# Create a DF for each party!
+Center_party <- group_split(ir)[[2]]
+Krist_demokraterna <- group_split(ir)[[3]]
+Liberal_party <- group_split(ir)[[4]]
+Moderat_party <-group_split(ir)[[5]]
+Enviorment_party <-group_split(ir)[[6]]
+Social_democrats <-group_split(ir)[[7]]
+Sweden_democrats <-group_split(ir)[[8]]
+Left_party <-group_split(ir)[[9]]
+
+
+
+
+
+
+
