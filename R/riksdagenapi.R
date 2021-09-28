@@ -1,4 +1,10 @@
-
+#' @title API Data pull from Swedish Riksdagen
+#' @description connects to the Riksdagen API and pulls the member wise voting data from 2009 to 2020
+#' @usage get_riksdagen_api_data()
+#' @return returns a list of elements where each element is a data frame of annual voting by member
+#' @importFrom httr status_code
+#' @importFrom jsonlite fromJSON
+#' @export
 get_riksdagen_api_data <- function() {
   #run the API query to fetch voting data from 2009-21 and store it as a list
   years <- c(2009:2020)

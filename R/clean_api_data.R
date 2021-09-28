@@ -1,7 +1,13 @@
-
-clean_api_data <- function(api_data) {
+#' @title Cleans API data
+#' @description takes list input from the get_riksdagen_api_data() and prepares dataset for Shiny App usage
+#' @usage clean_api_data(list1)
+#' @param list1 object as a nested list containing annual voting data
+#' @return returns a list of elements where each element is a data frame of annual voting by party
+#' @importFrom dplyr bind_rows
+#' @export
+clean_api_data <- function(list1) {
   # Create the DF shiny will use
-  df_1 <- api_data
+  df_1 <- list1
 
   #add years column to each DF in list
   year_labels <- c(2009:2020)
@@ -31,7 +37,3 @@ clean_api_data <- function(api_data) {
 
   return(cleaned_list)
 }
-
-
-
-
